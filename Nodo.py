@@ -6,8 +6,7 @@ class Node:
         self.parent = Node
         self.right = None
         self.left = None
-    def __lt__(self, other):
-        return self.data < other.data
+
     def __gt__(self, other):
         return self.data > other.data
     def __eq__(self, other):

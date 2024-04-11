@@ -1,9 +1,9 @@
 from functools import total_ordering
 
 class Node:
-    def __init__(self, key, Node):
+    def __init__(self, key, node):
         self.key = key
-        self.parent = Node
+        self.parent = node
         self.right = None
         self.left = None
     def __lt__(self, other):
@@ -14,6 +14,11 @@ class Node:
         if other == None:
             return False
         return self.key == other.key
+    def remove(self, node):
+        node.key == None
+        node.parent = None
+        node.right = None
+        node.left = None
     def __str__(self):
         return f"{self.key}"
     

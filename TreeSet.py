@@ -25,23 +25,58 @@ class TreeSet:
     #         return self.root.contains(value)
 
     def remove(self, value):
+        switcher = False
         if self.root is None:
             return False
         else:
-            while self.root.left is not None or self.root.right is not None:
-                if value < self.root.right.key:
-                    if value == self.root.key:
-                        print("H")
-                        self.root.remove(self.root)
-                        self.lista.remove(value)
-                        return True
-                    self.root = self.root.right
-                elif value > self.root.left.key:
-                    self.root = self.root.left
-                    if value == self.root.key:
-                        self.root.remove(self.root)
-                        self.lista.remove(value)
-                        return True
+            while self.root is not None:
+                if value < self.root.key:
+                    while self.root.left is not None:
+                        if switcher is not True:
+                            self.root = self.root.left
+                            if value == self.root.key:
+                                self.root.remove(self.root)
+                                self.lista.remove(value)
+                                return True
+                            if self.root.left is None:
+                                switcher = False
+                        elif switcher is True:
+                            self.root = self.root.right
+                            if value == self.root.key:
+                                self.root.remove(self.root)
+                                self.lista.remove(value)
+                                return True
+                            if self.root.right is None:
+                                switcher = False
+                        else:
+                            break
+                elif value > self.root.key:
+                    while self.root.right is not None:
+                        if switcher is not True:
+                            self.root = self.root.right
+                            if value == self.root.key:
+                                self.root.remove(self.root)
+                                self.lista.remove(value)
+                                return True
+                            if self.root.right is None:
+                                switcher = False
+                        elif switcher is True:
+                            self.root = self.root.left
+                            if value == self.root.key:
+                                self.root.remove(self.root)
+                                self.lista.remove(value)
+                                return True
+                            if self.root.left is None:
+                                switcher = False
+                        else:
+                            break
+                elif value == self.root.key:
+                    temp = self.root.right
+                    self.root.remove(self.root)
+                    self.lista.remove(value)
+                    self.root = temp
+                    return True
+                # aqui falta baaastante codigo todavia, es un simple esquema de como se podria hacer
 
     def __str__(self):
         if self.root == None:

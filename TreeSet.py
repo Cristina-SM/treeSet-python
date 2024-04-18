@@ -4,19 +4,31 @@ class TreeSet:
     def __init__(self):
         self.root = None
         self.lista = []
+        self.padreTotal = None
 
     def add(self, value):
+        
         if self.root is None:
             self.root = Node(value, None)
+            self.padreTotal = self.root
             self.lista.append(value)
         else:
             if value > self.root.key:
-                self.root.right = Node(value, self.root)
-                self.lista.append(value)
-
+                if self.root.right is not None:
+                    self.root = self.root.right
+                    self.add(value)
+                else:
+                    self.root.right = Node(value, self.root)
+                    self.lista.append(value)
+                    self.root = self.padreTotal  # mirar con lupa por si esta funcionando de verdad
             elif value < self.root.key:
-                self.root.left = Node(value, self.root)
-                self.lista.append(value)
+                if self.root.left is not None:
+                    self.root = self.root.left
+                    self.add(value)
+                else:
+                    self.root.left = Node(value, self.root)
+                    self.lista.append(value)
+                    self.root = self.padreTotal
 
     # def contains(self, value):
     #     if self.root == None:

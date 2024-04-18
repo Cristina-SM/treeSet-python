@@ -10,7 +10,11 @@ def main():
             tree_set.add("b")
             tree_set.add("a")
             tree_set.add("c")
-            print(tree_set.remove("b"))
+            tree_set.add("d")
+            tree_set.add("e")
+            tree_set.add("f")
+            tree_set.add("g")
+            #print(tree_set.remove("b"))
             # tree_set.add(1)
             # tree_set.add(7)
             print(tree_set)  # Output: 1, 3, 5, 7, 8

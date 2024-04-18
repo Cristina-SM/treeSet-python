@@ -1,15 +1,24 @@
-import functools
+from functools import total_ordering
 
 class Node:
-    @total_ordering
-    def __init__(self, Node):
-        self.parent = Node
+    def __init__(self, key, node):
+        self.key = key
+        self.parent = node
         self.right = None
         self.left = None
     def __lt__(self, other):
-        return self.data < other.data
+        return self.key < other.key
     def __gt__(self, other):
-        return self.data > other.data
+        return self.key > other.key
     def __eq__(self, other):
-        return self.data == other.data
+        if other == None:
+            return False
+        return self.key == other.key
+    def remove(self, node):
+        node.key == None
+        node.parent = None
+        node.right = None
+        node.left = None
+    def __str__(self):
+        return f"{self.key}"
     

@@ -15,6 +15,9 @@ def main():
             tree_set.add("f")
             tree_set.add("g")
             print(tree_set.size())
+
+            print(tree_set.contains("3"))
+            print(tree_set.descendingIterator())
             #print(tree_set.remove("b"))
             # tree_set.add(1)
             # tree_set.add(7)

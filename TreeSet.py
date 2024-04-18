@@ -87,6 +87,28 @@ class TreeSet:
     
     def size(self):
         return len(self.lista)
+    
+    def contains(self, value):
+        if self.root == None:
+            return False
+        else:
+            while self.root is not None:
+                if value < self.root.key:
+                    while self.root.left is not None:
+                        self.root = self.root.left
+                        if value == self.root.key:
+                            return True
+                        if self.root.left is None:
+                            return False
+                elif value > self.root.key:
+                    while self.root.right is not None:
+                        self.root = self.root.right
+                        if value == self.root.key:
+                            return True
+                        if self.root.right is None:
+                            return False
+                elif value == self.root.key:
+                    return True
 
     def __str__(self):
         if self.root == None:
@@ -94,7 +116,12 @@ class TreeSet:
         else:
             return f"{sorted(self.lista)}"
         
-    #def descendingIterator(self):
-    
+    def descendingIterator(self):
+        iterador = iter(self.lista[::-1])
+        for _ in range (0, len(self.lista)):
+            print(next(iterador))
 
-
+    def __iter__(self):
+        return self.lista.__iter__()
+    def __next__(self):
+        return self.lista.__next__()

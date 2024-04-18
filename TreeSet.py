@@ -30,12 +30,6 @@ class TreeSet:
                     self.lista.append(value)
                     self.root = self.padreTotal
 
-    # def contains(self, value):
-    #     if self.root == None:
-    #         return False
-    #     else:
-    #         return self.root.contains(value)
-
     def remove(self, value):
         switcher = False
         if self.root is None:
@@ -90,8 +84,17 @@ class TreeSet:
                     return True
                 # aqui falta baaastante codigo todavia, es un simple esquema de como se podria hacer
 
+    
+    def size(self):
+        return len(self.lista)
+
     def __str__(self):
         if self.root == None:
             return ""
         else:
             return f"{sorted(self.lista)}"
+        
+    #def descendingIterator(self):
+    
+
+

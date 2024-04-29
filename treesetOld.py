@@ -91,7 +91,7 @@ class TreeSetOld:
         return len(self.lista)
 
     def contains(self, value):
-        if self.root == None:
+        if self.root is None:
             return False
         else:
             while self.root is not None:
@@ -118,7 +118,7 @@ class TreeSetOld:
         self.padreTotal = None
 
     def __str__(self):
-        if self.root == None:
+        if self.root is None:
             return ""
         else:
             return f"{sorted(self.lista)}"
@@ -130,6 +130,3 @@ class TreeSetOld:
 
     def __iter__(self):
         return self.lista.__iter__()
-
-  
-  

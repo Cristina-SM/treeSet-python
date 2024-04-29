@@ -360,6 +360,24 @@ class TreeSet:
         new_node.right = self._clone_recursive(node.right)
         return new_node
 
+    def ceiling(self, value):
+        return self._ceiling_recursive(self.root, value)
+
+    def _ceiling_recursive(self, node, value):
+        if node is None:
+            return None
+        if node.key == value:
+            return node.key
+        if node.key < value:
+            return self._ceiling_recursive(node.right, value)
+
+        left_result = self._ceiling_recursive(node.left, value)
+
+        if left_result is not None:
+            return left_result
+
+        return node.key
+
     def __str__(self):
         # Método para imprimir el TreeSet en orden
         elements = []

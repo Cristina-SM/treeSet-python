@@ -57,10 +57,11 @@ def main():
     # print(tree_set_new.__repr__)
     for i in range(0, tree_set_new.size()):
         print(next(iterador))
-
+    new = tree_set_new.clone()
     tree_set_new.remove("a")
     print(tree_set_new.contains("a"))
     print(tree_set_new)
+    print(new)
     tree_set_new.clear()
     print(tree_set_new)
 

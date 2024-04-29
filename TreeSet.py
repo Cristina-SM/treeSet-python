@@ -343,6 +343,23 @@ class TreeSet:
         self.root = None
         self._size = 0
 
+    def clone(self):
+        cloned_tree_set = TreeSet()
+
+        # Llamar a una función auxiliar para clonar el árbol
+        cloned_tree_set.root = self._clone_recursive(self.root)
+        cloned_tree_set.size = self.size
+
+        return cloned_tree_set
+
+    def _clone_recursive(self, node):
+        if node is None:
+            return None
+        new_node = Node(node.key)
+        new_node.left = self._clone_recursive(node.left)
+        new_node.right = self._clone_recursive(node.right)
+        return new_node
+
     def __str__(self):
         # Método para imprimir el TreeSet en orden
         elements = []

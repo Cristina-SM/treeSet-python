@@ -1,31 +1,29 @@
 from Nodo import Node
-from DFS_utils import *;
-from DFS import *;
+
 
 class TreeSet:
     def __init__(self):
         self.root = None
         self.padreTotal = None
 
-    def add(self, value):
-        if self.root is None:
-            self.root = Node(value, None)
-            self.padreTotal = self.root
-        else:
-            if value > self.root.key:
-                if self.root.right is not None:
-                    self.root = self.root.right
-                    self.add(value)
-                else:
-                    self.root.right = Node(value, self.root)
-                    self.root = self.padreTotal  # mirar con lupa por si esta funcionando de verdad
-            elif value < self.root.key:
-                if self.root.left is not None:
-                    self.root = self.root.left
-                    self.add(value)
-                else:
-                    self.root.left = Node(value, self.root)
-                    self.root = self.padreTotal
+    def add(self, value, node=None):
+        if node is None:
+            if self.root is None:
+                self.root = Node(value)
+                return
+            else:
+                node = self.root
+
+        if value < node.key:
+            if node.left is None:
+                node.left = Node(value)
+            else:
+                self.add(value, node.left)
+        elif value > node.key:
+            if node.right is None:
+                node.right = Node(value)
+            else:
+                self.add(value, node.right)
 
     def remove(self, value):
         switcher = False
@@ -108,12 +106,20 @@ class TreeSet:
         else:
             return f"{sorted(self.lista)}"
         
-    def descendingIterator(self):
-        iterador = iter(self.lista[::-1])
-        for _ in range (0, ):
-            print(next(iterador))
    
     def __iter__(self):
         return self.lista.__iter__()
     def __next__(self):
         return self.lista.__next__()
+    
+
+    def dfs_descending(self, node=None):
+        if node is None:
+            node = self.root
+        stack = [node]
+        while stack:
+            node = stack.pop()
+            if node is not None:
+                yield node.key
+                stack.append(node.left)  # Primero se añade el hijo izquierdo al stack
+                stack.append(node.right)  # Luego se añade el hijo derecho

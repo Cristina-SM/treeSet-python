@@ -14,14 +14,16 @@ def main():
             tree_set.add("e")
             tree_set.add("f")
             tree_set.add("g")
-            print(tree_set.size())
+            #print(tree_set.size())
 
             print(tree_set.contains("3"))
-            print(tree_set.descendingIterator())
+            #for node in tree_set.dfs_descending():
+        #   print(node)
+
             #print(tree_set.remove("b"))
             # tree_set.add(1)
             # tree_set.add(7)
-            print(tree_set)  # Output: 1, 3, 5, 7, 8
+            #print(tree_set)  # Output: 1, 3, 5, 7, 8
 
             # # Check if the TreeSet contains a value
             # print(tree_set.contains(3))  # Output: True

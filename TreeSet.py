@@ -375,6 +375,28 @@ class TreeSet:
 
         return cloned_tree_set
 
+    def pollLast(self):
+        if self.root is None:
+            return None
+        
+        current = self.root
+        while current.right is not None:
+            current = current.right
+        
+        self.remove(current.key)
+        return current.key
+    
+    def pollFirst(self):
+        if self.root is None:
+            return None
+        
+        current = self.root
+        while current.left is not None:
+            current = current.left
+        
+        self.remove(current.key)
+        return current.key
+
     def __str__(self):
         # Método para imprimir el TreeSet en orden
         elements = []

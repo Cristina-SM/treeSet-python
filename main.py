@@ -4,7 +4,6 @@ from TreeSet import TreeSet
 def main():
     print("Treeset new")
     tree_set_new = TreeSet()
-
     tree_set_new.add("b")
     tree_set_new.add("a")
     tree_set_new.add("d")
@@ -60,7 +59,7 @@ def main():
 
     print("Método pollFirst")
     print(tree_set_new.pollFirst())
-    
+
 
 if __name__ == "__main__":
     main()

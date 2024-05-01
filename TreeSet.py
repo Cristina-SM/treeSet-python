@@ -373,3 +373,24 @@ class TreeSet:
             self._inorder_traversal(node.left, result)
             result.append(node.key)
             self._inorder_traversal(node.right, result)
+
+    ### juanqui pruebas //__iter__, first, last, isEmpty, 
+    def __iter__(self):
+        return self._inorder_generator(self.root)
+
+    def _inorder_generator(self, node):
+        if node is not None:
+            yield from self._inorder_generator(node.left)
+            yield node.key
+            yield from self._inorder_generator(node.right)
+
+    def first(self):
+        return next(iter(self))
+    
+    def last(self):
+        iter1 = self.descendingIterator()
+        return next(iter1)
+    
+    def isEmpty(self):
+        return self.root is None
+

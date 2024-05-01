@@ -290,7 +290,6 @@ class TreeSet:
                 1 + self._size_recursive(node.left) + self._size_recursive(node.right)
             )
 
-
     def _clone_recursive(self, node):
         if node is None:
             return None
@@ -308,7 +307,7 @@ class TreeSet:
             return self._search(key, node.left)
         else:
             return self._search(key, node.right)
-        
+
     def _inorder_traversal(self, node, result):
         if node:
             self._inorder_traversal(node.left, result)
@@ -322,7 +321,7 @@ class TreeSet:
             yield from self._inorder_generator(node.right)
 
     ### OBLIGATORIOS PARA EL TRABAJO
-    
+
     # Función para insertar un nodo en el árbol
     def add(self, key):
         if self.root is None:
@@ -374,6 +373,7 @@ class TreeSet:
         cloned_tree_set.size = self.size
 
         return cloned_tree_set
+
     def ceiling(self, value):
         return self._ceiling_recursive(self.root, value)
 
@@ -392,6 +392,28 @@ class TreeSet:
 
         return node.key
 
+    def pollLast(self):
+        if self.root is None:
+            return None
+
+        current = self.root
+        while current.right is not None:
+            current = current.right
+
+        self.remove(current.key)
+        return current.key
+
+    def pollFirst(self):
+        if self.root is None:
+            return None
+
+        current = self.root
+        while current.left is not None:
+            current = current.left
+
+        self.remove(current.key)
+        return current.key
+
     def __str__(self):
         # Método para imprimir el TreeSet en orden
         elements = []
@@ -400,19 +422,19 @@ class TreeSet:
             return "[]"
         return "['" + "', '".join(map(str, elements)) + "']"
 
-    ### juanqui pruebas //__iter__, first, last, isEmpty, 
+    ### juanqui pruebas //__iter__, first, last, isEmpty,
     def __iter__(self):
         return self._inorder_generator(self.root)
 
     def first(self):
         return next(iter(self))
-    
+
     def last(self):
         return next(self.descendingIterator())
-    
+
     def isEmpty(self):
         return self.root is None
-    
+
     def lower(self, key):
         current = self.root
         lower = None
@@ -423,7 +445,7 @@ class TreeSet:
             else:
                 current = current.left
         return lower
-    
+
     def floor(self, key):
         current = self.root
         floor = None
@@ -434,7 +456,7 @@ class TreeSet:
             else:
                 current = current.left
         return floor
-    
+
     def higher(self, key):
         current = self.root
         higher = None
@@ -445,4 +467,3 @@ class TreeSet:
             else:
                 current = current.right
         return higher
-

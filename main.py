@@ -55,6 +55,12 @@ def main():
     print("Método higher")
     print(tree_set_new.higher("b"))
 
+    print("Método pollLast")
+    print(tree_set_new.pollLast())
+
+    print("Método pollFirst")
+    print(tree_set_new.pollFirst())
+    
 
 if __name__ == "__main__":
     main()

@@ -64,33 +64,6 @@ class TreeSet:
             sep = " " * int(len(sep) / 2)  # cut separator size in half
         return content
 
-    def add(self, key):
-        if self.root is None:
-            self.root = Node(key)
-        else:
-            self._add(key, self.root)
-
-    # Función para insertar un nodo en el árbol
-    def _add(self, key, node):
-        if key < node.key:
-            if node.left is None:
-                node.left = Node(key)
-
-                node.left.parent = node
-                self._inspect_insertion(node.left)
-            else:
-                self._add(key, node.left)
-        elif key > node.key:
-            if node.right is None:
-                node.right = Node(key)
-
-                node.right.parent = node
-                self._inspect_insertion(node.right)
-            else:
-                self._add(key, node.right)
-        else:
-            print(f"El valor {key} ya esta en el arbol")
-
     def height(self):
         if self.root is not None:
             return self._height(self.root, 0)
@@ -120,10 +93,6 @@ class TreeSet:
         elif key > node.key and node.right is not None:
             return self._find(key, node.right)
         return None
-
-    # Funcion para eliminar un nodo
-    def remove(self, key):
-        return self.remove_node(self.find(key))
 
     def remove_node(self, node):
         # Comprobar si el nodo a eliminar existe
@@ -321,8 +290,14 @@ class TreeSet:
                 1 + self._size_recursive(node.left) + self._size_recursive(node.right)
             )
 
-    def contains(self, key):
-        return self._search(key, self.root)
+
+    def _clone_recursive(self, node):
+        if node is None:
+            return None
+        new_node = Node(node.key)
+        new_node.left = self._clone_recursive(node.left)
+        new_node.right = self._clone_recursive(node.right)
+        return new_node
 
     def _search(self, key, node):
         if node is None:
@@ -333,6 +308,55 @@ class TreeSet:
             return self._search(key, node.left)
         else:
             return self._search(key, node.right)
+        
+    def _inorder_traversal(self, node, result):
+        if node:
+            self._inorder_traversal(node.left, result)
+            result.append(node.key)
+            self._inorder_traversal(node.right, result)
+
+    def _inorder_generator(self, node):
+        if node is not None:
+            yield from self._inorder_generator(node.left)
+            yield node.key
+            yield from self._inorder_generator(node.right)
+
+    ### OBLIGATORIOS PARA EL TRABAJO
+    
+    # Función para insertar un nodo en el árbol
+    def add(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._add(key, self.root)
+
+    # Subfunción para insertar
+    def _add(self, key, node):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+
+                node.left.parent = node
+                self._inspect_insertion(node.left)
+            else:
+                self._add(key, node.left)
+        elif key > node.key:
+            if node.right is None:
+                node.right = Node(key)
+
+                node.right.parent = node
+                self._inspect_insertion(node.right)
+            else:
+                self._add(key, node.right)
+        else:
+            print(f"El valor {key} ya esta en el arbol")
+
+    # Funcion para eliminar un nodo
+    def remove(self, key):
+        return self.remove_node(self.find(key))
+
+    def contains(self, key):
+        return self._search(key, self.root)
 
     def descendingIterator(self):
         elements = []
@@ -345,21 +369,11 @@ class TreeSet:
 
     def clone(self):
         cloned_tree_set = TreeSet()
-
         # Llamar a una función auxiliar para clonar el árbol
         cloned_tree_set.root = self._clone_recursive(self.root)
         cloned_tree_set.size = self.size
 
         return cloned_tree_set
-
-    def _clone_recursive(self, node):
-        if node is None:
-            return None
-        new_node = Node(node.key)
-        new_node.left = self._clone_recursive(node.left)
-        new_node.right = self._clone_recursive(node.right)
-        return new_node
-
     def ceiling(self, value):
         return self._ceiling_recursive(self.root, value)
 
@@ -386,8 +400,49 @@ class TreeSet:
             return "[]"
         return "['" + "', '".join(map(str, elements)) + "']"
 
-    def _inorder_traversal(self, node, result):
-        if node:
-            self._inorder_traversal(node.left, result)
-            result.append(node.key)
-            self._inorder_traversal(node.right, result)
+    ### juanqui pruebas //__iter__, first, last, isEmpty, 
+    def __iter__(self):
+        return self._inorder_generator(self.root)
+
+    def first(self):
+        return next(iter(self))
+    
+    def last(self):
+        return next(self.descendingIterator())
+    
+    def isEmpty(self):
+        return self.root is None
+    
+    def lower(self, key):
+        current = self.root
+        lower = None
+        while current is not None:
+            if current.key < key:
+                lower = current.key
+                current = current.right
+            else:
+                current = current.left
+        return lower
+    
+    def floor(self, key):
+        current = self.root
+        floor = None
+        while current is not None:
+            if current.key <= key:
+                floor = current.key
+                current = current.right
+            else:
+                current = current.left
+        return floor
+    
+    def higher(self, key):
+        current = self.root
+        higher = None
+        while current is not None:
+            if current.key > key:
+                higher = current.key
+                current = current.left
+            else:
+                current = current.right
+        return higher
+

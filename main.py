@@ -80,5 +80,8 @@ def main():
     print("Método last")
     print(tree_set_new.last())
 
+    print("Método lower")
+    print(tree_set_new.lower("a"))
+
 if __name__ == "__main__":
     main()

@@ -57,6 +57,6 @@ def main():
 
     print("Método pollFirst")
     print(tree_set_new.pollFirst())
-
+    
 if __name__ == "__main__":
     main()

@@ -5,18 +5,21 @@ def main():
     print("Treeset new")
     tree_set_new = TreeSet()
     tree_set_new.add("b")
-    tree_set_new.add("a")
+    tree_set_new.add("A")
     tree_set_new.add("d")
-    tree_set_new.add("c")
     tree_set_new.add("g")
-    tree_set_new.add("f")
-    tree_set_new.add("e")
+    tree_set_new.add("m")
+    tree_set_new.add("H")
+    tree_set_new.add("a")
+    tree_set_new.add("C")
 
     print(tree_set_new)
     print(tree_set_new.size())
     print(tree_set_new.contains("a"))
     iterador = tree_set_new.descendingIterator()
-    # print(tree_set_new.__repr__)
+    print(tree_set_new.__repr__)
+    pepe = tree_set_new.clone()
+    print(pepe.__repr__)
     print("Iterador descendente")
     for _ in range(0, tree_set_new.size()):
         print(next(iterador))
@@ -60,6 +63,8 @@ def main():
     print("Método pollFirst")
     print(tree_set_new.pollFirst())
 
+    print("Lista actualizada")
+    print(tree_set_new)
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 from Nodo import Node
-
+from ClassCastException import ClassCastException
+from NullPointerException import NullPointerException
 
 class TreeSet:
 
@@ -326,8 +327,15 @@ class TreeSet:
     def add(self, key):
         if self.root is None:
             self.root = Node(key)
-        else:
+            return True
+        elif (self.root is not None and self.root.key.__class__ != key.__class__):
+            raise ClassCastException(f"El elemento no es del tipo {self.root.key.__class__}.") 
+        elif key is None:
+            raise NullPointerException("El elemento a introducir no puede ser nulo")
+        elif self.find(key) is None:
             self._add(key, self.root)
+            return True
+        return False
 
     # Subfunción para insertar
     def _add(self, key, node):

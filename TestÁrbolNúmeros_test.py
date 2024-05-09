@@ -1,5 +1,9 @@
 import unittest
+
 from TreeSet import TreeSet
+
+from TreeSet import TreeSet
+
 
 class NumberTest(unittest.TestCase):
     def setUp(self):
@@ -40,12 +44,11 @@ class NumberTest(unittest.TestCase):
         self.assertEqual(self.tree.ceiling(36), 36)
         self.assertEqual(self.tree.ceiling(37), 45)
 
-
     def testTreeAfterPoll(self):
         self.tree.pollFirst()
         self.tree.pollLast()
         self.assertEqual(self.tree.__str__(), "['7', '11', '36', '45', '53']")
-        #self.assertRaises()
+        # self.assertRaises()
 
     def testSize(self):
         self.assertEqual(self.tree.size(), 7)
@@ -73,5 +76,6 @@ class NumberTest(unittest.TestCase):
             lista.append(next(iter1))
         self.assertEqual(lista, [1, 7, 11, 36, 45, 53, 70])
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

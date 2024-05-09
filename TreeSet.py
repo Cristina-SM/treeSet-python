@@ -1,6 +1,5 @@
 from Nodo import Node
-from ClassCastException import ClassCastException
-from NullPointerException import NullPointerException
+from Exceptions import ClassCastException, NullPointerException, NoSuchElementException
 
 class TreeSet:
 
@@ -338,8 +337,8 @@ class TreeSet:
                 raise ClassCastException(f"El elemento a introducir no es del tipo {self.tree_type.__class__}.")
             self.root = Node(key)
             return True
-        elif self.root is not None and type(self.tree_type) != type(key):
-            raise ClassCastException(f"El elemento no es del tipo {self.tree_type.__class__}.") 
+        elif self.root is not None and type(self.tree_type) is not type(key):
+            raise ClassCastException(f"El elemento no es del tipo {self.tree_type.__class__}.")
         elif key is None:
             raise NullPointerException("El elemento a introducir no puede ser nulo")
         elif self.find(key) is None:
@@ -449,6 +448,8 @@ class TreeSet:
         return self._inorder_generator(self.root)
 
     def first(self):
+        if self.isEmpty():
+            raise NoSuchElementException("No hay elementos en el árbol")
         return next(iter(self))
 
     def last(self):

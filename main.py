@@ -1,14 +1,15 @@
-from TreeSet import TreeSet
 import time
+
+from TreeSet import TreeSet
 
 
 def main():
     print("Treeset new")
     tree_set_new = TreeSet(int)
-    #tree_set_new.add("b")
-    #tree_set_new.add(1);
+    tree_set_new.add("b")
+    # tree_set_new.add(1);
     print(tree_set_new)
-    #tree_set_new.remove(1)
+    # tree_set_new.remove(1)
     # tree_set_new.add("b")
     # tree_set_new.add(1)
     # tree_set_new.add("d")
@@ -20,7 +21,7 @@ def main():
 
     # print(tree_set_new)
     # print(tree_set_new.size())
-    # print(tree_set_new.contains("a"))
+    print(tree_set_new.contains(1))
     # iterador = tree_set_new.descendingIterator()
     # print(tree_set_new.__repr__)
     # pepe = tree_set_new.clone()
@@ -71,12 +72,13 @@ def main():
     # print("Lista actualizada")
     # print(tree_set_new)
 
+
 def test_times():
     with open("data/times.csv", mode="w", encoding="utf-8") as fw:
         size = 1
         print("size;miliseconds;seconds", file=fw)
 
-        while size < 17 * 10 ** 6:
+        while size < 17 * 10**6:
             # Registro del tiempo de inicio
             tree = TreeSet(int)
             start_time = time.perf_counter()
@@ -89,10 +91,16 @@ def test_times():
             duration = (end_time - start_time) * 1000
             print(f"Tiempo de ejecución ({size}):", duration, "milisegundos")
 
-            print(f"{size};{round(duration, 3)};{round(duration / 1000, 3)}".replace(".", ","), file=fw)
+            print(
+                f"{size};{round(duration, 3)};{round(duration / 1000, 3)}".replace(
+                    ".", ","
+                ),
+                file=fw,
+            )
 
             size <<= 1
 
+
 if __name__ == "__main__":
-    #main()
-    test_times()
+    main()
+    # test_times()

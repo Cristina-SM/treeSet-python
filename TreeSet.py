@@ -316,9 +316,10 @@ class TreeSet:
         return new_node
 
     def _search(self, key, node):
-
-        if node is None:
+        if self.find(key) is None:
             return False
+        if node is None:
+            raise NullPointerException("El nodo no puede ser nulo")
         if key == node.key:
             return True
         if key < node.key:

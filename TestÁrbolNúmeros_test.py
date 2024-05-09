@@ -3,7 +3,7 @@ from TreeSet import TreeSet
 
 class NumberTest(unittest.TestCase):
     def setUp(self):
-        self.tree = TreeSet()
+        self.tree = TreeSet(int)
         self.tree.add(1)
         self.tree.add(53)
         self.tree.add(36)

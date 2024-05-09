@@ -94,5 +94,5 @@ def test_times():
             size <<= 1
 
 if __name__ == "__main__":
-    #main()
-    test_times()
+    main()
+    #test_times()

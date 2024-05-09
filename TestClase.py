@@ -13,12 +13,11 @@ class TestCoche(unittest.TestCase):
         self.assertFalse(self.tree.add(self.coche1))
         self.assertTrue(self.tree.add(self.coche2))
 
-
     def test_removeCoche(self):
         self.assertTrue(self.tree.remove(self.coche1))
     
     def test_lenCoche(self):
-        self.assertEqual(self.tree.size(),1)
+        self.assertEqual(self.tree.size(), 1)
     
     def test_comparaMatricula1(self):
         self.assertTrue(self.coche1.matricula.__eq__("4578LMZ"))

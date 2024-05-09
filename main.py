@@ -6,11 +6,13 @@ from TreeSet import TreeSet
 def main():
     print("Treeset new")
     tree_set_new = TreeSet(int)
-    tree_set_new.add(1)
-    tree_set_new.add(2)
-    tree_set_new.add(3)
-    tree_set_new.add(4)
-    tree_set_new.add(5)
+    tree_set_new.addAll([1, None, 2, 4, 5, 6, 7, 8, 9, 10])
+
+    # tree_set_new.add(1)
+    # tree_set_new.add(None)
+    # tree_set_new.add(3)
+    # tree_set_new.add(4)
+    # tree_set_new.add(5)
     print(tree_set_new)
     # tree_set_new.remove(1)
     # tree_set_new.add("b")

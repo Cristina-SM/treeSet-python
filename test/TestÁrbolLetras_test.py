@@ -1,6 +1,6 @@
 import unittest
 
-from TreeSet import TreeSet
+import TreeSet
 
 
 class LetterTest(unittest.TestCase):

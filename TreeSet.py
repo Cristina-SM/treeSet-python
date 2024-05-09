@@ -1,6 +1,5 @@
-from ClassCastException import ClassCastException
+from Exception import ClassCastException, NullPointerException
 from Nodo import Node
-from NullPointerException import NullPointerException
 
 
 class TreeSet:

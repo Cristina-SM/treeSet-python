@@ -1,4 +1,6 @@
-from Exception import ClassCastException, NullPointerException
+import ClassCastException
+import NullPointerException
+import NoSuchElementException
 from Nodo import Node
 
 
@@ -461,15 +463,23 @@ class TreeSet:
         return self._inorder_generator(self.root)
 
     def first(self):
+        if (self.root is None):
+            raise NoSuchElementException("No hay elementos en el árbol")
         return next(iter(self))
 
     def last(self):
+        if (self.root is None):
+            raise NoSuchElementException("No hay elementos en el árbol")
         return next(self.descendingIterator())
 
     def isEmpty(self):
         return self.root is None
 
     def lower(self, key):
+        if key is None:
+            raise NullPointerException("No existen elementos nulos en el árbol.\n")
+        elif self.tree_type is not type(key):
+            raise ClassCastException("No existen elementos de este tipo en el árbol.\n")
         current = self.root
         lower = None
         while current is not None:
@@ -481,6 +491,10 @@ class TreeSet:
         return lower
 
     def floor(self, key):
+        if key is None:
+            raise NullPointerException("No existen elementos nulos en el árbol.\n")
+        elif self.tree_type is not type(key):
+            raise ClassCastException("No existen elementos de este tipo en el árbol.\n")
         current = self.root
         floor = None
         while current is not None:
@@ -492,6 +506,10 @@ class TreeSet:
         return floor
 
     def higher(self, key):
+        if key is None:
+            raise NullPointerException("No existen elementos nulos en el árbol.\n")
+        elif self.tree_type is not type(key):
+            raise ClassCastException("No existen elementos de este tipo en el árbol.\n")
         current = self.root
         higher = None
         while current is not None:

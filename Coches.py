@@ -1,7 +1,6 @@
 class Coches:
-    def __init__(self,matricula, marca):
+    def __init__(self, matricula):
         self.matricula = matricula
-        self.marca = marca
 
     def __eq__(self, matricula):
         return self.matricula == matricula

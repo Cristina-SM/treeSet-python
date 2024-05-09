@@ -1,7 +1,6 @@
-import ClassCastException
-import NullPointerException
-import NoSuchElementException
+from ClassCastException import ClassCastException
 from Nodo import Node
+from NullPointerException import NullPointerException
 
 
 class TreeSet:
@@ -449,6 +448,21 @@ class TreeSet:
 
         self.remove(current.key)
         return current.key
+
+    def addAll(self, collection):
+        flag = True
+        for i in collection:
+            if i is None:
+                raise NullPointerException("El elemento a introducir no puede ser nulo")
+            elif type(i) is not self.tree_type:
+                raise ClassCastException(
+                    f"El elemento no es del tipo {self.tree_type}."
+                )
+                
+        if flag:
+            for i in collection:
+                self.add(i)
+        return flag
 
     def __str__(self):
         # Método para imprimir el TreeSet en orden

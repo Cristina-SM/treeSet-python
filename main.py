@@ -7,6 +7,10 @@ def main():
     print("Treeset new")
     tree_set_new = TreeSet(int)
     tree_set_new.add(1)
+    tree_set_new.add(2)
+    tree_set_new.add(3)
+    tree_set_new.add(4)
+    tree_set_new.add(5)
     print(tree_set_new)
     # tree_set_new.remove(1)
     # tree_set_new.add("b")
@@ -20,7 +24,7 @@ def main():
 
     # print(tree_set_new)
     # print(tree_set_new.size())
-    # print(tree_set_new.contains(NONE))
+    print(tree_set_new.contains(3))
     # iterador = tree_set_new.descendingIterator()
     # print(tree_set_new.__repr__)
     # pepe = tree_set_new.clone()
@@ -62,14 +66,17 @@ def main():
     # print("Método higher")
     # print(tree_set_new.higher("b"))
 
-    # print("Método pollLast")
-    # print(tree_set_new.pollLast())
+    print("Clear all")
+    print(tree_set_new.clear())
 
-    # print("Método pollFirst")
-    # print(tree_set_new.pollFirst())
+    print("Método pollLast")
+    print(tree_set_new.pollLast())
 
-    # print("Lista actualizada")
-    # print(tree_set_new)
+    print("Método pollFirst")
+    print(tree_set_new.pollFirst())
+
+    print("Lista actualizada")
+    print(tree_set_new)
 
 
 def test_times():

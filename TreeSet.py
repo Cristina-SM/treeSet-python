@@ -9,7 +9,7 @@ class TreeSet:
         self.root = None
         if (tree_type).__eq__ is object.__eq__ or (tree_type).__lt__ is object.__lt__:
             raise ClassCastException(
-                f"El elemento no es implementa la clase comparable."
+                "El elemento no es implementa la clase comparable."
             )
         self.tree_type = tree_type
 
@@ -109,9 +109,10 @@ class TreeSet:
             if (
                 node.__class__.__eq__ is object.__eq__
                 and node.__class__.__lt__ is object.__lt__
+                and self.tree_type is not type(node.key)
             ):
                 raise ClassCastException(
-                    f"No existen elementos de este tipo en el árbol.\n"
+                    "No existen elementos de este tipo en el árbol.\n"
                 )
         if self.find(node.key) is None:
             print("No se encuentra el nodo a eliminar")
@@ -350,10 +351,8 @@ class TreeSet:
                 )
             self.root = Node(key)
             return True
-        elif self.root is not None and type(self.tree_type) is not type(key):
-            raise ClassCastException(
-                f"El elemento no es del tipo {self.tree_type.__class__}."
-            )
+        elif self.root is not None and self.tree_type is not type(key):
+            raise ClassCastException(f"El elemento no es del tipo {self.tree_type}.")
         elif key is None:
             raise NullPointerException("El elemento a introducir no puede ser nulo")
         elif self.find(key) is None:

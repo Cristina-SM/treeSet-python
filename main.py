@@ -6,8 +6,7 @@ from TreeSet import TreeSet
 def main():
     print("Treeset new")
     tree_set_new = TreeSet(int)
-    tree_set_new.add("b")
-    # tree_set_new.add(1);
+    tree_set_new.add(1)
     print(tree_set_new)
     # tree_set_new.remove(1)
     # tree_set_new.add("b")
@@ -21,7 +20,7 @@ def main():
 
     # print(tree_set_new)
     # print(tree_set_new.size())
-    print(tree_set_new.contains(1))
+    # print(tree_set_new.contains(NONE))
     # iterador = tree_set_new.descendingIterator()
     # print(tree_set_new.__repr__)
     # pepe = tree_set_new.clone()

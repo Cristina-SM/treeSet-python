@@ -23,8 +23,7 @@ class EmptyTree(unittest.TestCase):
         self.assertEqual(self.tree.size(), 1)
 
     def testRemoveNonExistingElement(self):
-        with self.assertRaises(NullPointerException):
-            self.tree.remove("a")
+        self.assertRaises(NullPointerException, self.tree.remove, "a")
         self.assertEqual(self.tree.size(), 0)
     
     def testIter(self):

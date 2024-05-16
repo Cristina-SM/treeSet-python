@@ -32,7 +32,11 @@ class EmptyTree(unittest.TestCase):
         for _ in range(0, self.tree.size()):
             lista.append(next(iter1))
         self.assertEqual(lista, [])
-
     
+    def testPollFirst(self):
+        
+
+
+
 if __name__ == '__main__':
     unittest.main()

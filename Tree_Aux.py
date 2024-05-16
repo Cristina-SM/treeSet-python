@@ -29,6 +29,21 @@ class AVL_tree:
             else:
                 print(f"El valor {key} ya esta en el arbol\n")
 
+        def _ceiling_recursive(self, node, value):
+            if node is None:
+                return None
+            if node.key == value:
+                return node.key
+            if node.key < value:
+                return self._ceiling_recursive(node.right, value)
+
+            left_result = self._ceiling_recursive(node.left, value)
+
+            if left_result is not None:
+                return left_result
+
+            return node.key
+
         def height(self):
             if self.root is not None:
                 return self._height(self.root, 0)
@@ -51,7 +66,6 @@ class AVL_tree:
 
         # Funcion para buscar un nodo
         def _find(self, key, node):
-
             if key == node.key:
                 return node
             elif key < node.key and node.left is not None:
@@ -141,6 +155,7 @@ class AVL_tree:
                     self.get_height(node_parent.left), self.get_height(node_parent.right)
                 )
                 self._inspect_deletion(node_parent)
+            return False
 
         def search(self, key):
             if self.root is not None:

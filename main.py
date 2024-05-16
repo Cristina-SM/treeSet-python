@@ -7,6 +7,7 @@ def main():
     print("Treeset new")
     tree_set_new = TreeSet(int)
     tree_set_new.addAll([1, 2, 4, 5, 6, 7, 8, 9, 10])
+    print(tree_set_new.size())
     print(tree_set_new)
 
 

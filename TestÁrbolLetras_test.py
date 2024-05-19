@@ -47,7 +47,6 @@ class LetterTest(unittest.TestCase):
         self.tree.pollFirst()
         self.tree.pollLast()
         self.assertEqual(self.tree.__str__(), "['C', 'H', 'a', 'b', 'd', 'g']")
-        # self.assertRaises()
 
     def testSize(self):
         self.assertEqual(self.tree.size(), 8)

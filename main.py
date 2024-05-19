@@ -4,20 +4,7 @@ from TreeSet import TreeSet
 
 
 def main():
-    print("Treeset new")
-    tree_set_new = TreeSet()
-    tree_set_new.add("b")
-    # tree_set_new.add(1)
-    tree_set_new.add("d")
-    # tree_set_new.add("g")
-    # tree_set_new.add("m")
-    # tree_set_new.add("H")
-    # tree_set_new.add("a")
-    # tree_set_new.add("C")
-    tree_set_new = TreeSet(int)
-    tree_set_new.addAll([1, 2, 4, 5, 6, 7, 8, 9, 10])
-    print(tree_set_new.size())
-    print(tree_set_new)
+    print("Treeset main")
 
 
 def test_times():
@@ -50,4 +37,4 @@ def test_times():
 
 if __name__ == "__main__":
     main()
-    #test_times()
+    # test_times()

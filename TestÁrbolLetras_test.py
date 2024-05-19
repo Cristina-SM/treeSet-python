@@ -5,7 +5,7 @@ from TreeSet import TreeSet
 
 class LetterTest(unittest.TestCase):
     def setUp(self):
-        self.tree = TreeSet()
+        self.tree = TreeSet(str)
         self.tree.add("b")
         self.tree.add("A")
         self.tree.add("d")

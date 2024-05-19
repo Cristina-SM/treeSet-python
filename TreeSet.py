@@ -5,8 +5,13 @@ from NullPointerException import NullPointerException
 
 class TreeSet:
 
-    def __init__(self):
+    def __init__(self, tree_type):
         self.root = None
+        if (tree_type).__eq__ is object.__eq__ or (tree_type).__lt__ is object.__lt__:
+            raise ClassCastException(
+                "El elemento no es implementa la clase comparable."
+            )
+        self.tree_type = tree_type
 
     def __repr__(self):
         if self.root is None:
@@ -98,7 +103,18 @@ class TreeSet:
 
     def remove_node(self, node):
         # Comprobar si el nodo a eliminar existe
-        if node is None or self.find(node.key) is None:
+        if node is None:
+            raise NullPointerException("El nodo a eliminar no puede ser nulo")
+        elif node is not None:
+            if (
+                node.__class__.__eq__ is object.__eq__
+                and node.__class__.__lt__ is object.__lt__
+                and self.tree_type is not type(node.key)
+            ):
+                raise ClassCastException(
+                    "No existen elementos de este tipo en el árbol.\n"
+                )
+        if self.find(node.key) is None:
             print("No se encuentra el nodo a eliminar")
             return False
 
@@ -301,8 +317,10 @@ class TreeSet:
         return new_node
 
     def _search(self, key, node):
-        if node is None:
+        if self.find(key) is None:
             return False
+        if node is None:
+            raise NullPointerException("El nodo no puede ser nulo")
         if key == node.key:
             return True
         if key < node.key:
@@ -327,12 +345,14 @@ class TreeSet:
     # Función para insertar un nodo en el árbol
     def add(self, key):
         if self.root is None:
+            if type(key) is not self.tree_type:
+                raise ClassCastException(
+                    f"El elemento a introducir no es del tipo {self.tree_type}."
+                )
             self.root = Node(key)
             return True
-        elif self.root is not None and self.root.key.__class__ != key.__class__:
-            raise ClassCastException(
-                f"El elemento no es del tipo {self.root.key.__class__}."
-            )
+        elif self.root is not None and self.tree_type is not type(key):
+            raise ClassCastException(f"El elemento no es del tipo {self.tree_type}.")
         elif key is None:
             raise NullPointerException("El elemento a introducir no puede ser nulo")
         elif self.find(key) is None:
@@ -359,13 +379,17 @@ class TreeSet:
             else:
                 self._add(key, node.right)
         else:
-            print(f"El valor {key} ya esta en el arbol")
+            print(f"El valor {key} ya esta en el arbol\n")
 
-    # Funcion para eliminar un nodo
+    # Función para eliminar un nodo
     def remove(self, key):
         return self.remove_node(self.find(key))
 
     def contains(self, key):
+        if key is None:
+            raise NullPointerException("No existen elementos nulos en el árbol.\n")
+        elif self.tree_type is not type(key):
+            raise ClassCastException("No existen elementos de este tipo en el árbol.\n")
         return self._search(key, self.root)
 
     def descendingIterator(self):
@@ -424,6 +448,21 @@ class TreeSet:
 
         self.remove(current.key)
         return current.key
+
+    def addAll(self, collection):
+        flag = True
+        for i in collection:
+            if i is None:
+                raise NullPointerException("El elemento a introducir no puede ser nulo")
+            elif type(i) is not self.tree_type:
+                raise ClassCastException(
+                    f"El elemento no es del tipo {self.tree_type}."
+                )
+
+        if flag:
+            for i in collection:
+                self.add(i)
+        return flag
 
     def __str__(self):
         # Método para imprimir el TreeSet en orden

@@ -7,3 +7,6 @@ class Coches:
 
     def __lt__(self, other):
         return self.matricula < other.matricula
+
+    def __gt__(self, other):
+        return self.matricula > other.matricula

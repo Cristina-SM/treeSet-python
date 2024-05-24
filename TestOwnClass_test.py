@@ -170,19 +170,5 @@ class TestCoche(unittest.TestCase):
             "Removing a Coche instance that exists should return False.",
         )
 
-    # The following tests are commented out as they are currently not implemented.
-    # def testCeiling(self):
-    #     self.assertEqual(self.tree.ceiling("g"), "g")
-    #     self.assertEqual(self.tree.ceiling("z"), None)
-    #
-    # def testFloor(self):
-    #     self.assertEqual(self.tree.floor("g"), "g")
-    #
-    # def testHigher(self):
-    #     self.assertEqual(self.tree.higher("g"), "m")
-    #
-    # def testLower(self):
-    #     self.assertEqual(self.tree.lower("g"), "d")
-
 if __name__ == "__main__":
     unittest.main()

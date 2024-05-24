@@ -35,8 +35,8 @@ class TestCoche(unittest.TestCase):
         self.assertEqual(self.tree.last(), "555ftg")
 
     # def testLower(self):
-    #     self.assertEqual(self.tree.lower("g"), "d")
-    #
+    #     self.assertEqual(self.tree.lower(Coches("2555AAP")), Coches("2384jkl"))
+    
     # def testFloor(self):
     #     self.assertEqual(self.tree.floor("g"), "g")
     #
@@ -46,7 +46,7 @@ class TestCoche(unittest.TestCase):
     # def testCeiling(self):
     #     self.assertEqual(self.tree.ceiling("g"), "g")
     #     self.assertEqual(self.tree.ceiling("z"), None)
-    #
+
     def testTreeAfterPoll(self):
         self.tree.add(self.coche)
         self.tree.add(self.coche2)

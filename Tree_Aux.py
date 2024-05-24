@@ -1,19 +1,38 @@
 from ClassCastException import ClassCastException
-from Nodo import Node
+from Node import Node
 from NullPointerException import NullPointerException
 
 
 class AVL_tree:
-    def __init__(self, tree_type):
-        self.root = None
-        self.tree_type = tree_type
+    class TreeAux:
+        def __init__(self, tree_type):
+            """
+            Initializes a TreeAux object.
 
-    # Subfunción para insertar
+            Parameters:
+            - tree_type (str): The type of the tree.
+
+            Attributes:
+            - root: The root node of the tree.
+            - tree_type: The type of the tree.
+            """
+            self.root = None
+            self.tree_type = tree_type
+
     def _add(self, key, node):
+        """
+        Adds a new node with the given key to the tree.
+
+        Parameters:
+        - key: The key of the node to be added.
+        - node: The current node being inspected during the insertion process.
+
+        Returns:
+        None
+        """
         if key < node.key:
             if node.left is None:
                 node.left = Node(key)
-
                 node.left.parent = node
                 self._inspect_insertion(node.left)
             else:
@@ -21,15 +40,24 @@ class AVL_tree:
         elif key > node.key:
             if node.right is None:
                 node.right = Node(key)
-                
                 node.right.parent = node
                 self._inspect_insertion(node.right)
             else:
                 self._add(key, node.right)
         else:
-            print(f"El valor {key} ya esta en el arbol\n")
+            print(f"Key '{key}' is already in the tree\n")
 
     def _ceiling_recursive(self, node, value):
+        """
+        Recursively finds the smallest key in the tree that is greater than or equal to the given value.
+
+        Args:
+            node (Node): The current node being checked.
+            value: The value to compare against.
+
+        Returns:
+            The smallest key in the tree that is greater than or equal to the given value, or None if no such key exists.
+        """
         if node is None:
             return None
         if node.key == value:
@@ -45,13 +73,31 @@ class AVL_tree:
         return node.key
 
     def height(self):
+        """
+        Returns the height of the tree.
+
+        The height of a tree is defined as the maximum number of edges in any path from the root to a leaf node.
+
+        Returns:
+            int: The height of the tree. If the tree is empty, returns 0.
+        """
         if self.root is not None:
             return self._height(self.root, 0)
         else:
             return 0
 
-    # Funcion para obtener la altura de un nodo
     def _height(self, node, height):
+        """
+        Calculates the height of a given node in the tree.
+
+        Parameters:
+        - node: The node for which to calculate the height.
+        - height: The current height of the node.
+
+        Returns:
+        - The height of the node.
+
+        """
         if node is None:
             return height
         left_height = self._height(node.left, height + 1)
@@ -59,46 +105,68 @@ class AVL_tree:
         return max(left_height, right_height)
 
     def find(self, key):
-        if self.root is not None:
-            return self._find(key, self.root)
-        else:
+            """
+            Finds the node with the given key in the tree.
+
+            Parameters:
+            - key: The key to search for in the tree.
+
+            Returns:
+            - The node with the given key if found, None otherwise.
+            """
+            if self.root is not None:
+                return self._find(key, self.root)
+            else:
+                return None
+
+    def _find(self, key, node):
+            """
+            Recursively finds a node with the given key in the tree.
+
+            Args:
+                key: The key to search for.
+                node: The current node being checked.
+
+            Returns:
+                The node with the given key if found, otherwise None.
+            """
+            if key == node.key:
+                return node
+            elif key < node.key and node.left is not None:
+                return self._find(key, node.left)
+            elif key > node.key and node.right is not None:
+                return self._find(key, node.right)
             return None
 
-    # Funcion para buscar un nodo
-    def _find(self, key, node):
-        if key == node.key:
-            return node
-        elif key < node.key and node.left is not None:
-            return self._find(key, node.left)
-        elif key > node.key and node.right is not None:
-            return self._find(key, node.right)
-        return None
-
     def remove_node(self, node):
-        # Comprobar si el nodo a eliminar existe
+        """
+        Removes a node from the tree.
+
+        Args:
+            node: The node to be removed.
+
+        Returns:
+            bool: True if the node was successfully removed, False otherwise.
+        """
         if node is None:
-            raise NullPointerException("El nodo a eliminar no puede ser nulo")
+            raise NullPointerException("Node to remove cannot be None\n")
         elif node is not None:
             if (
                 node.__class__.__eq__ is object.__eq__
                 and node.__class__.__lt__ is object.__lt__
                 and self.tree_type is not type(node.key)
             ):
-                raise ClassCastException(
-                    "No existen elementos de este tipo en el árbol.\n"
-                )
+                raise ClassCastException(f"The type of the node to remove must be {self.tree_type}\n")
         if self.find(node.key) is None:
-            print("No se encuentra el nodo a eliminar")
+            print("Node not found\n")
             return False
 
-        # Funcion para obtener el nodo con el valor minimo
         def min_value_node(n):
             current = n
             while current.left is not None:
                 current = current.left
             return current
 
-        # Funcion para obtener el numero de hijos de un nodo
         def num_children(n):
             num_children = 0
             if n.left is not None:
@@ -107,12 +175,10 @@ class AVL_tree:
                 num_children += 1
             return num_children
 
-        # Obtenemos el nodo padre del nodo a eliminar
         node_parent = node.parent
-        # Obtenemos el numero de hijos del nodo a eliminar
         node_children = num_children(node)
 
-        # Caso 1: El nodo a eliminar no tiene hijos
+        # Case 1: Node to remove has no children
         if node_children == 0:
             if node_parent is not None:
                 if node_parent.left == node:
@@ -122,7 +188,8 @@ class AVL_tree:
 
             else:
                 self.root = None
-        # Caso 2: El nodo a eliminar tiene solo un hijo
+
+        # Case 2: Node to remove has only a child
         if node_children == 1:
             next_node = None
 
@@ -131,8 +198,7 @@ class AVL_tree:
             else:
                 next_node = node.right
 
-            # En el caso de que el nodo a eliminar sea la raiz
-            # Reemplazamos el nodo a eliminar por su hijo
+            # In case node to remove is the root, swap node to remove with his child
             if node_parent is not None:
                 if node_parent.left == node:
                     node_parent.left = next_node
@@ -143,7 +209,7 @@ class AVL_tree:
 
             next_node.parent = node_parent
 
-        # Caso 3: El nodo a eliminar tiene dos hijos
+        # Case 3: Node to remove has two children
         if node_children == 2:
             successor = min_value_node(node.right)
             node.key = successor.key
@@ -158,12 +224,31 @@ class AVL_tree:
         return False
 
     def search(self, key):
-        if self.root is not None:
-            return self._search(key, self.root)
-        else:
-            return False
+            """
+            Searches for a given key in the tree.
+
+            Parameters:
+            - key: The key to search for.
+
+            Returns:
+            - True if the key is found in the tree, False otherwise.
+            """
+            if self.root is not None:
+                return self._search(key, self.root)
+            else:
+                return False
 
     def _search(self, key, node):
+        """
+        Recursively searches for a key in the tree starting from the given node.
+
+        Args:
+            key: The key to search for.
+            node: The current node being checked.
+
+        Returns:
+            True if the key is found in the tree, False otherwise.
+        """
         if key == node.key:
             return True
         elif key < node.key and node.left is not None:
@@ -173,6 +258,16 @@ class AVL_tree:
         return False
 
     def _inspect_insertion(self, node, path=[]):
+        """
+        Inspects the insertion of a node in the tree and performs rebalancing if necessary.
+
+        Args:
+            node: The node being inserted.
+            path: The path from the inserted node to the root of the tree.
+
+        Returns:
+            None
+        """
         if node.parent is None:
             return
         path = [node] + path
@@ -190,6 +285,15 @@ class AVL_tree:
         self._inspect_insertion(node.parent, path)
 
     def _inspect_deletion(self, node):
+        """
+        Inspects the tree after a deletion operation to check if rebalancing is required.
+
+        Args:
+            node: The node to inspect.
+
+        Returns:
+            None
+        """
         if node is None:
             return
         left_height = self.get_height(node.left)
@@ -203,6 +307,20 @@ class AVL_tree:
         self._inspect_deletion(node.parent)
 
     def _rebalance_node(self, z, y, x):
+        """
+        Rebalances the tree by performing rotation operations based on the configuration of nodes z, y, and x.
+
+        Parameters:
+        - z: The parent node of y.
+        - y: The parent node of x.
+        - x: The node being rebalanced.
+
+        Raises:
+        - Exception: If the configuration of nodes z, y, and x is not recognized.
+
+        Returns:
+        - None
+        """
         if y == z.left and x == y.left:
             self._right_rotate(z)
         elif y == z.left and x == y.right:
@@ -215,10 +333,19 @@ class AVL_tree:
             self._left_rotate(z)
         else:
             raise Exception(
-                "Rebalance error: la configuracio de z,y,x no esta reconocida"
+                "Rebalance error: z,y,x node configuration not recognized!"
             )
 
     def _right_rotate(self, z):
+        """
+        Performs a right rotation on the given node 'z' in the tree.
+
+        Args:
+            z: The node to be rotated.
+
+        Returns:
+            None
+        """
         sub_root = z.parent
         y = z.left
         t3 = y.right
@@ -239,6 +366,15 @@ class AVL_tree:
         y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
 
     def _left_rotate(self, z):
+        """
+        Performs a left rotation on the given node 'z' in the tree.
+
+        Args:
+            z: The node to be rotated.
+
+        Returns:
+            None
+        """
         sub_root = z.parent
         y = z.right
         t2 = y.left
@@ -259,6 +395,15 @@ class AVL_tree:
         y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
 
     def taller_child(self, node):
+        """
+        Returns the child node with the greater height.
+
+        Parameters:
+        - node: The node for which to determine the taller child.
+
+        Returns:
+        - The child node with the greater height.
+        """
         left = self.get_height(node.left)
         right = self.get_height(node.right)
         if left >= right:
@@ -267,11 +412,30 @@ class AVL_tree:
             return node.right
 
     def get_height(self, node):
+        """
+        Returns the height of the given node.
+
+        Parameters:
+        - node: The node for which to calculate the height.
+
+        Returns:
+        - The height of the node. If the node is None, returns 0.
+        """
         if node is None:
             return 0
         return node.height
 
     def _size_recursive(self, node):
+        """
+        Recursively calculates the size of the tree rooted at the given node.
+
+        Args:
+            node: The root node of the tree.
+
+        Returns:
+            The size of the tree.
+
+        """
         if node is None:
             return 0
         else:
@@ -280,6 +444,15 @@ class AVL_tree:
             )
 
     def _clone_recursive(self, node):
+        """
+        Recursively clones a node and its children.
+
+        Args:
+            node (Node): The node to be cloned.
+
+        Returns:
+            Node: The cloned node.
+        """
         if node is None:
             return None
         new_node = Node(node.key)
@@ -290,10 +463,23 @@ class AVL_tree:
         return new_node
 
     def _search(self, key, node):
+        """
+        Recursively searches for a key in the tree starting from the given node.
+
+        Args:
+            key: The key to search for.
+            node: The starting node for the search.
+
+        Returns:
+            True if the key is found in the tree, False otherwise.
+
+        Raises:
+            NullPointerException: If the given node is None.
+        """
         if self.find(key) is None:
             return False
         if node is None:
-            raise NullPointerException("El nodo no puede ser nulo")
+            raise NullPointerException("Node to remove cannot be None")
         if key == node.key:
             return True
         if key < node.key:
@@ -302,13 +488,32 @@ class AVL_tree:
             return self._search(key, node.right)
 
     def _inorder_traversal(self, node, result):
+        """
+        Perform an inorder traversal of the tree starting from the given node.
+
+        Args:
+            node: The starting node for the traversal.
+            result: A list to store the keys of the nodes in the traversal order.
+
+        Returns:
+            None
+        """
         if node:
             self._inorder_traversal(node.left, result)
             result.append(node.key)
             self._inorder_traversal(node.right, result)
 
     def _inorder_generator(self, node):
-        if node is not None:
-            yield from self._inorder_generator(node.left)
-            yield node.key
-            yield from self._inorder_generator(node.right)
+            """
+            Generates the keys of the tree in an inorder traversal.
+
+            Args:
+                node: The root node of the subtree to traverse.
+
+            Yields:
+                The keys of the tree in an inorder traversal.
+            """
+            if node is not None:
+                yield from self._inorder_generator(node.left)
+                yield node.key
+                yield from self._inorder_generator(node.right)

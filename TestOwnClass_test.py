@@ -22,7 +22,7 @@ class TestCoche(unittest.TestCase):
         """
         self.tree = TreeSet(Car)
         self.coche = Car("4578LMZ")
-        self.coche2 = Car("555ftg")
+        self.coche2 = Car("5555ftg")
         self.coche3 = Car("2829abc")
         self.coche4 = Car("2384jkl")
 
@@ -107,7 +107,7 @@ class TestCoche(unittest.TestCase):
         self.tree.add(self.coche)
         self.tree.add(self.coche2)
         self.assertEqual(
-            self.tree.last(), "555ftg", "The last Coche instance should be '555ftg'."
+            self.tree.last(), "5555ftg", "The last Coche instance should be '5555ftg'."
         )
 
     def testNullPointer(self):
@@ -169,20 +169,6 @@ class TestCoche(unittest.TestCase):
             self.tree.remove(self.coche),
             "Removing a Coche instance that exists should return False.",
         )
-
-    # The following tests are commented out as they are currently not implemented.
-    # def testCeiling(self):
-    #     self.assertEqual(self.tree.ceiling("g"), "g")
-    #     self.assertEqual(self.tree.ceiling("z"), None)
-    #
-    # def testFloor(self):
-    #     self.assertEqual(self.tree.floor("g"), "g")
-    #
-    # def testHigher(self):
-    #     self.assertEqual(self.tree.higher("g"), "m")
-    #
-    # def testLower(self):
-    #     self.assertEqual(self.tree.lower("g"), "d")
 
 if __name__ == "__main__":
     unittest.main()

@@ -45,7 +45,7 @@ class TreeSet(AVL_tree):
         return False
 
     def addAll(self, collection):
-        flag = True
+        flag = False
         for i in collection:
             if i is None:
                 raise NullPointerException("El elemento a introducir no puede ser nulo")
@@ -53,9 +53,9 @@ class TreeSet(AVL_tree):
                 raise ClassCastException(
                     f"El elemento no es del tipo {self.tree_type}."
                 )
-
-        if flag:
-            for i in collection:
+        for i in collection:    
+            if i is not None and self.find(i) is None:
+                flag = True
                 self.add(i)
         return flag
 

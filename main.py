@@ -13,14 +13,12 @@ def test_times():
         print("size;miliseconds;seconds", file=fw)
 
         while size < 17 * 10**6:
-            # Registro del tiempo de inicio
             tree = TreeSet(int)
             start_time = time.perf_counter()
 
             for i in range(size):
                 tree.add(i)
 
-            # Registro del tiempo de finalización
             end_time = time.perf_counter()
             duration = (end_time - start_time) * 1000
             print(f"Tiempo de ejecución ({size}):", duration, "milisegundos")

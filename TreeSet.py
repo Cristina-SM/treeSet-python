@@ -6,26 +6,23 @@ from Tree_Aux import AVL_tree
 
 
 class TreeSet(AVL_tree):
+    def __init__(self, tree_type):
+        """
+        Initializes a TreeSet object.
 
-    class TreeSet:
-        def __init__(self, tree_type):
-            """
-            Initializes a TreeSet object.
+        Args:
+            tree_type: The type of elements that the TreeSet will store.
 
-            Args:
-                tree_type: The type of elements that the TreeSet will store.
+        Raises:
+            ClassCastException: If the element does not implement the comparable class.
+        """
 
-            Raises:
-                ClassCastException: If the element does not implement the comparable class.
-            """
-            self.root = None
-            if (tree_type).__eq__ is object.__eq__ or (
-                tree_type
-            ).__lt__ is object.__lt__:
-                raise ClassCastException(
-                    "The element does not implement the comparable class."
-                )
-            self.tree_type = tree_type
+        self.root = None
+        if (tree_type).__eq__ is object.__eq__ or (tree_type).__lt__ is object.__lt__:
+            raise ClassCastException(
+                "The element does not implement the comparable class."
+            )
+        self.tree_type = tree_type
 
     def __str__(self):
         """Returns a string representation of the TreeSet in order.

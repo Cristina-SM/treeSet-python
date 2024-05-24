@@ -1,5 +1,5 @@
 from ClassCastException import ClassCastException
-from Nodo import Node
+from Node import Node
 from NullPointerException import NullPointerException
 
 

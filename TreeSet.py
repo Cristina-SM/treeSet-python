@@ -1,5 +1,5 @@
 from ClassCastException import ClassCastException
-from Nodo import Node
+from Node import Node
 from NoSuchElementException import NoSuchElementException
 from NullPointerException import NullPointerException
 from Tree_Aux import AVL_tree

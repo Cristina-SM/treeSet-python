@@ -1,17 +1,17 @@
 import unittest
 
-from Coches import Coches
+from Car import Car
 from NullPointerException import NullPointerException
 from TreeSet import TreeSet
 
 
-class TestCoche(unittest.TestCase):
+class CarTest(unittest.TestCase):
     def setUp(self):
-        self.tree = TreeSet(Coches)
-        self.coche = Coches("4578LMZ")
-        self.coche2 = Coches("555ftg")
-        self.coche3 = Coches("2829abc")
-        self.coche4 = Coches("2384jkl")
+        self.tree = TreeSet(Car)
+        self.coche = Car("4578LMZ")
+        self.coche2 = Car("555ftg")
+        self.coche3 = Car("2829abc")
+        self.coche4 = Car("2384jkl")
 
     def test_addCoche(self):
         self.assertTrue(self.tree.add(self.coche))
@@ -29,8 +29,8 @@ class TestCoche(unittest.TestCase):
         self.assertTrue(self.ntree.isEmpty())
 
     def testContains(self):
-        self.assertFalse(self.tree.contains(Coches("2829abc")))
-        self.assertFalse(self.tree.contains(Coches("2384jkl")))
+        self.assertFalse(self.tree.contains(Car("2829abc")))
+        self.assertFalse(self.tree.contains(Car("2384jkl")))
 
     def testFirst(self):
         self.tree.add(self.coche)

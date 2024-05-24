@@ -10,3 +10,6 @@ class Car:
 
     def __gt__(self, other):
         return self.plate > other.plate
+    
+    def __str__(self):
+        return self.plate

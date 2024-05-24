@@ -3,6 +3,7 @@ from tkinter import *
 
 from ClassCastException import ClassCastException
 from TreeSet import TreeSet
+from Car import Car
 
 
 class TreesetApp(tk.Tk):
@@ -164,16 +165,12 @@ class TreesetApp(tk.Tk):
 
 
 if __name__ == "__main__":
+    # If you want to add more types, you have to add them to the dictionary below.
+    dic = {"str": str, "int": int, "float": float, "Car": Car}
     tree_type = input("Enter the tree type: ")
-    if tree_type == "str":
-        tree_type = str
-    elif tree_type == "int":
-        tree_type = int
-    elif tree_type == "float":
-        tree_type = float
-    else:
-        raise ClassCastException("Invalid type")
-        exit()
+    if tree_type not in dic:
+        raise ClassCastException(f"Invalid type: {tree_type}")
+    tree_type = dic[tree_type]
 
     my_gui = TreesetApp()
     my_gui.master.mainloop()

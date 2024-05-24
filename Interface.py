@@ -90,7 +90,7 @@ class TreesetApp(tk.Tk):
 
 
 if __name__ == "__main__":
-    tree_type = input("Introduce un ejemplo del tipo del árbol: ")
+    tree_type = input("Enter the tree type: ")
     if tree_type == "str":
         tree_type = str
     elif tree_type == "int":
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     elif tree_type == "float":
         tree_type = float
     else:
-        ClassCastException("Tipo no válido")
+        raise ClassCastException("Invalid type")
         exit()
 
     my_gui = TreesetApp()

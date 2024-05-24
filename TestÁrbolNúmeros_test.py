@@ -2,8 +2,6 @@ import unittest
 
 from TreeSet import TreeSet
 
-from TreeSet import TreeSet
-
 
 class NumberTest(unittest.TestCase):
     def setUp(self):
@@ -48,10 +46,7 @@ class NumberTest(unittest.TestCase):
         self.tree.pollFirst()
         self.tree.pollLast()
         self.assertEqual(self.tree.__str__(), "['7', '11', '36', '45', '53']")
-        # self.assertRaises()
-
-    def testSize(self):
-        self.assertEqual(self.tree.size(), 7)
+        self.assertEqual(self.tree.size(), 5)
 
     def testClone(self):
         self.ntree = self.tree.clone()

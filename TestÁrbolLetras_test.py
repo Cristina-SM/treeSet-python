@@ -5,7 +5,7 @@ from TreeSet import TreeSet
 
 class LetterTest(unittest.TestCase):
     def setUp(self):
-        self.tree = TreeSet()
+        self.tree = TreeSet(str)
         self.tree.add("b")
         self.tree.add("A")
         self.tree.add("d")
@@ -47,7 +47,6 @@ class LetterTest(unittest.TestCase):
         self.tree.pollFirst()
         self.tree.pollLast()
         self.assertEqual(self.tree.__str__(), "['C', 'H', 'a', 'b', 'd', 'g']")
-        # self.assertRaises()
 
     def testSize(self):
         self.assertEqual(self.tree.size(), 8)

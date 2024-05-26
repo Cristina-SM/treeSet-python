@@ -148,18 +148,6 @@ class AVL_tree:
         Returns:
             bool: True if the node was successfully removed, False otherwise.
         """
-        if node is None:
-            raise NullPointerException("Node to remove cannot be None\n")
-        elif node is not None:
-            if (
-                node.__class__.__eq__ is object.__eq__
-                and node.__class__.__lt__ is object.__lt__
-                and self.tree_type is not type(node.key)
-            ):
-                raise ClassCastException(f"The type of the node to remove must be {self.tree_type}\n")
-        if self.find(node.key) is None:
-            print("Node not found\n")
-            return False
 
         def min_value_node(n):
             current = n
@@ -188,6 +176,7 @@ class AVL_tree:
 
             else:
                 self.root = None
+                return True
 
         # Case 2: Node to remove has only a child
         if node_children == 1:
@@ -208,14 +197,15 @@ class AVL_tree:
                 self.root = next_node
 
             next_node.parent = node_parent
+            return True
 
         # Case 3: Node to remove has two children
         if node_children == 2:
             successor = min_value_node(node.right)
             node.key = successor.key
             self.remove_node(successor)
-
             return True
+
         if node_parent is not None:
             node_parent.height = 1 + max(
                 self.get_height(node_parent.left), self.get_height(node_parent.right)

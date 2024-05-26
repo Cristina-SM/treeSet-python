@@ -2,6 +2,7 @@ import unittest
 
 from Car import Car
 from NullPointerException import NullPointerException
+from ClassCastException import ClassCastException
 from TreeSet import TreeSet
 
 
@@ -35,7 +36,7 @@ class TestCoche(unittest.TestCase):
         self.assertTrue(
             self.tree.add(self.coche), "Adding a Coche instance should return True."
         )
-        self.assertFalse(
+        self.assertTrue(
             self.tree.remove(self.coche),
             "Removing a Coche instance that exists should return False.",
         )
@@ -120,7 +121,7 @@ class TestCoche(unittest.TestCase):
         """
         with self.assertRaises(NullPointerException):
             self.tree.add(None)
-        with self.assertRaises(NullPointerException):
+        with self.assertRaises(ClassCastException):
             self.tree.remove("6952rtr")
 
     def testSize(self):
@@ -165,7 +166,7 @@ class TestCoche(unittest.TestCase):
         self.assertTrue(
             self.tree.add(self.coche), "Adding a Coche instance should return True."
         )
-        self.assertFalse(
+        self.assertTrue(
             self.tree.remove(self.coche),
             "Removing a Coche instance that exists should return False.",
         )

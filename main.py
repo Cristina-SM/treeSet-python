@@ -1,10 +1,16 @@
 import time
 
 from TreeSet import TreeSet
+from Interface import TreesetApp
 
 
 def main():
     print("Treeset main")
+    # app = TreesetApp(int)
+    # app.master.mainloop()
+    tree = TreeSet(int)
+    tree.add(1)
+    print(tree.remove(3))
 
 
 def test_times():
@@ -36,3 +42,4 @@ def test_times():
 if __name__ == "__main__":
     main()
     # test_times()
+    

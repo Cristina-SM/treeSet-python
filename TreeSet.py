@@ -341,7 +341,14 @@ class TreeSet(AVL_tree):
         Returns:
             The removed key if it exists in the TreeSet, None otherwise.
         """
-        return self.remove_node(self.find(key))
+        if self.tree_type is not type(key):
+            raise ClassCastException(f"The type of the node to remove must be {self.tree_type}\n")
+        elif key is None:
+            raise NullPointerException("Node to remove cannot be None")
+        elif self.find(key) is None:
+            return False
+        else:
+            return self.remove_node(self.find(key))
 
     def size(self):
         """

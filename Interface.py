@@ -7,7 +7,7 @@ from Car import Car
 
 
 class TreesetApp(tk.Tk):
-    def __init__(self):
+    def __init__(self, tree_type = int):
         """
         Initializes the Interface class.
 
@@ -20,6 +20,7 @@ class TreesetApp(tk.Tk):
         Returns:
         None
         """
+        self.tree_type = tree_type
         self.master = Tk()
         self.master.geometry("800x800")
         self.tree = TreeSet(tree_type)
@@ -79,7 +80,7 @@ class TreesetApp(tk.Tk):
         Returns:
         None
         """
-        data = tree_type(self.entry.get())
+        data = self.tree_type(self.entry.get())
         self.tree.add(data)
         self.update_canvas()
 
@@ -95,7 +96,7 @@ class TreesetApp(tk.Tk):
         Returns:
         None
         """
-        data = tree_type(self.entry.get())
+        data = self.tree_type(self.entry.get())
         self.tree.remove(data)
         self.update_canvas()
 
@@ -106,7 +107,7 @@ class TreesetApp(tk.Tk):
         Returns:
             None
         """
-        print(self.tree.contains(tree_type(self.entry.get())))
+        print(self.tree.contains(self.tree_type(self.entry.get())))
 
     def size(self):
             """
@@ -165,12 +166,5 @@ class TreesetApp(tk.Tk):
 
 
 if __name__ == "__main__":
-    # If you want to add more types, you have to add them to the dictionary below.
-    dic = {"str": str, "int": int, "float": float, "Car": Car}
-    tree_type = input("Enter the tree type: ")
-    if tree_type not in dic:
-        raise ClassCastException(f"Invalid type: {tree_type}")
-    tree_type = dic[tree_type]
-
     my_gui = TreesetApp()
     my_gui.master.mainloop()

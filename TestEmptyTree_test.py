@@ -2,6 +2,7 @@ import unittest
 
 from NullPointerException import NullPointerException
 from NoSuchElementException import NoSuchElementException
+from ClassCastException import ClassCastException
 from TreeSet import TreeSet
 
 
@@ -225,16 +226,10 @@ class EmptyTree(unittest.TestCase):
         This test ensures that attempting to remove an element that is not present in the TreeSet
         raises the appropriate exception and does not alter the size of the TreeSet.
         """
-        with self.assertRaises(
-            NullPointerException,
-            msg="Removing a non-existing element should raise NullPointerException",
-        ):
-            self.tree.remove("a")
-        self.assertEqual(
-            self.tree.size(),
-            0,
-            "The size of the tree should remain 0 when trying to remove a non-existing element.",
-        )
+
+        with self.assertRaises(ClassCastException):
+            self.tree.remove(1)
+
 
     def testSize(self):
         """
